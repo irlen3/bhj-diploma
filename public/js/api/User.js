@@ -26,11 +26,7 @@ class User {
    * из локального хранилища
    * */
   static current() {
-    try {
-      return JSON.parse(localStorage.user);   
-    } catch(e) {
-      return e;  
-    }
+    return JSON.parse(localStorage.getItem("user"));
   }
 
   /**
@@ -38,7 +34,20 @@ class User {
    * авторизованном пользователе.
    * */
   static fetch(callback) {
-  
+    createRequest({
+      url: '/user/current',
+      method: 'GET',
+      responseType: 'json',
+      callback: (err, response) => {
+        if (response.success) {
+          this.setCurrent(response.user);
+        }
+        else {
+          this.unsetCurrent(response.user);
+        }
+        callback(err, response);
+      }
+    });
   }
 
   /**
@@ -49,7 +58,7 @@ class User {
    * */
   static login( data, callback) {
     createRequest({
-      url: '/user' + '/login',
+      url: '/user/login',
       method: 'POST',
       responseType: 'json',
       data,
@@ -70,7 +79,7 @@ class User {
    * */
   static register( data, callback) {
   createRequest({
-    url: '/user' + '/register',
+    url: '/user/register',
     method: 'POST',
     responseType: 'json',
     data,
@@ -89,7 +98,7 @@ class User {
    * */
   static logout( data, callback) {
   createRequest({
-    url: '/user' + '/logout',
+    url: '/user/logout',
     method: 'POST',
     responseType: 'json',
     data,

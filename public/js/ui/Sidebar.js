@@ -21,13 +21,9 @@ class Sidebar {
     this.toggleButton = document.querySelector('.sidebar-toggle');
     this.bodyChange = document.querySelector('.sidebar-mini');
     this.toggleButton.addEventListener('click', () => {
-      if(!this.bodyChange.classList.contains('sidebar-open' && 'sidebar-collapse')) {
-        this.bodyChange.classList.add('sidebar-open');
-        this.bodyChange.classList.add('sidebar-collapse');
-      } else {
-        this.bodyChange.classList.remove('sidebar-open');
-        this.bodyChange.classList.remove('sidebar-collapse');
-      }
+
+    this.bodyChange.classList.toggle('sidebar-open');
+    this.bodyChange.classList.toggle('sidebar-collapse');
     });
   }
 
@@ -41,14 +37,12 @@ class Sidebar {
   static initAuthLinks() {
     let buttonRegister = document.querySelector(".menu-item_register");
     buttonRegister.addEventListener('click', () => {
-      this.modal = App.getModal('register');
-      this.modal.open();
+      App.getModal('register').open();
     });
 
     let buttonLogin = document.querySelector(".menu-item_login");
     buttonLogin.addEventListener('click', () => {
-      this.modal = App.getModal('login');
-      this.modal.open();
+      App.getModal('login').open();
     });
 
     let buttonLogout = document.querySelector(".menu-item_logout");

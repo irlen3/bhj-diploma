@@ -19,5 +19,4 @@ class Account extends Entity {
   }
 }
 
-// Ira
 Account.URL = '/account';

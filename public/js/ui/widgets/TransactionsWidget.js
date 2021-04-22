@@ -12,12 +12,11 @@ class TransactionsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-    try {
-      this.element = element;
+      if(element) 
+        this.element = element; 
+      else 
+        throw new Error ("Переданный элемент не существует");
       this.registerEvents();
-    } catch (error) {
-      return error;
-    }
   }
   /**
    * Регистрирует обработчики нажатия на
@@ -29,14 +28,13 @@ class TransactionsWidget {
     let buttonIncome, buttonExpense, modal;
     buttonIncome = this.element.querySelector('.create-income-button');
     buttonIncome.addEventListener('click',() => {
-      modal = new Modal(document.querySelector("#modal-new-income"));
-      modal.open();
+      App.getModal('newIncome').open();
+
     });
 
     buttonExpense = this.element.querySelector('.create-expense-button');
     buttonExpense.addEventListener('click',() => {
-      modal = new Modal(document.querySelector("#modal-new-expense"));
-      modal.open();
+      App.getModal('newExpense').open();
     });
   }
 }

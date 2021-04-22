@@ -10,7 +10,7 @@ class Entity {
    * */
   static list(data, callback){
     createRequest({
-      url: this.URL,
+      url: this.URL +'?account_id=' + data,
       method: 'GET',
       responseType: 'json',
       data,
@@ -34,6 +34,7 @@ class Entity {
       callback: (success, response) => {
         callback(success, response);
       }
+      // callback: (success, response)
     });
   }
 

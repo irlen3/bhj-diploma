@@ -133,6 +133,12 @@
       "email": "ira@ira",
       "password": "ira",
       "id": "e2ckn8xtf41"
+    },
+    {
+      "name": "11111",
+      "email": "11111@11111",
+      "password": "11111",
+      "id": "6gwknsxmkoq"
     }
   ],
   "accounts": [
@@ -157,19 +163,9 @@
       "id": "c0ckmqd95vt"
     },
     {
-      "name": "2222",
-      "user_id": "1al3jh130kmgt4lcl",
-      "id": "310kn7hs0zd"
-    },
-    {
       "name": "приват",
       "user_id": "1al3jh130kmgt4lcl",
       "id": "at8kn7ldbov"
-    },
-    {
-      "name": "11111",
-      "user_id": "1al3jh130kmgt4lcl",
-      "id": "67skn8xugsm"
     },
     {
       "name": "valuta",
@@ -185,6 +181,11 @@
       "name": "Альфа банк",
       "user_id": "1al3jhebokmgf46bb",
       "id": "1al3jhgj8knaem85r"
+    },
+    {
+      "name": "альфа",
+      "user_id": "1al3jh130kmgt4lcl",
+      "id": "1al3jh550kninlf8z"
     }
   ],
   "transactions": [
@@ -570,15 +571,6 @@
       "created_at": "2021-04-08T13:15:31.910Z"
     },
     {
-      "id": "2w0kn8xolzf",
-      "type": "income",
-      "name": "ghg",
-      "sum": 1000,
-      "account_id": "310kn7hs0zd",
-      "user_id": "1al3jh130kmgt4lcl",
-      "created_at": "2021-04-08T13:46:20.618Z"
-    },
-    {
       "id": "1zwkn8y0rxn",
       "type": "income",
       "name": "salary",
@@ -676,6 +668,69 @@
       "account_id": "1al3jhgj8knaem85r",
       "user_id": "1al3jhebokmgf46bb",
       "created_at": "2021-04-09T14:47:03.001Z"
+    },
+    {
+      "id": "1al3jhb2kkninibj2",
+      "type": "expense",
+      "name": "овощи",
+      "sum": 10,
+      "account_id": "c0ckmqd95vt",
+      "user_id": "1al3jhebokmgf46bb",
+      "created_at": "2021-04-15T08:59:12.733Z"
+    },
+    {
+      "id": "1al3jh7hwkninxsa2",
+      "type": "income",
+      "name": "income ",
+      "sum": 1000,
+      "account_id": "1al3jhgj8knaem85r",
+      "user_id": "1al3jhebokmgf46bb",
+      "created_at": "2021-04-15T09:11:14.281Z"
+    },
+    {
+      "id": "1al3jh3jgkninzdr0",
+      "type": "income",
+      "name": "111",
+      "sum": 10000,
+      "account_id": "1al3jh550kninlf8z",
+      "user_id": "1al3jh130kmgt4lcl",
+      "created_at": "2021-04-15T09:12:28.763Z"
+    },
+    {
+      "id": "1al3jh2ckkninzqyp",
+      "type": "expense",
+      "name": "tomato",
+      "sum": 19,
+      "account_id": "1al3jh550kninlf8z",
+      "user_id": "1al3jh130kmgt4lcl",
+      "created_at": "2021-04-15T09:12:45.888Z"
+    },
+    {
+      "id": "21gknkckvlf",
+      "type": "income",
+      "name": "pancake sell",
+      "sum": 100,
+      "account_id": "1al3jhgj8knaem85r",
+      "user_id": "1al3jhebokmgf46bb",
+      "created_at": "2021-04-16T13:28:48.626Z"
+    },
+    {
+      "id": "1al3jh8rsknrj6grt",
+      "type": "income",
+      "name": "123123",
+      "sum": 100,
+      "account_id": "1al3jhejgknrj66w5",
+      "user_id": "1al3jhebokmgf46bb",
+      "created_at": "2021-04-21T14:07:56.776Z"
+    },
+    {
+      "id": "1al3jhgtsknrju1vh",
+      "type": "expense",
+      "name": "dsfsdf",
+      "sum": 100,
+      "account_id": "at8kn7ldbov",
+      "user_id": "1al3jh130kmgt4lcl",
+      "created_at": "2021-04-21T14:26:17.212Z"
     }
   ]
 }

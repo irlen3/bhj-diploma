@@ -11,24 +11,19 @@ class TransactionsPage {
    * через registerEvents()
    * */
   constructor( element ) {
-    try {
-      this.lastOptions;
-      this.element = element;
-      this.registerEvents();
-    } catch (error) {
-      return error;
-    }  
+    if(element) 
+      this.element = element; 
+    else 
+      throw new Error ("Переданный элемент не существует");
+    this.lastOptions;
+    this.registerEvents();
   }
 
   /**
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
-    if(this.lastOptions) {
       this.render(this.lastOptions);
-    } else {
-      this.render();
-    }
   }
 
   /**
@@ -40,17 +35,7 @@ class TransactionsPage {
   registerEvents() {
     this.element.addEventListener('click', (event) => {
       if(event.target.classList.contains('remove-account')) {
-          let name;
-          name = this.element.querySelector('.content-title').innerHTML;
-          Account.list(name, (err, response) => {
-            if (response) {
-              let arr, index;
-              arr = Array.from(response.data);
-              index = arr.findIndex(element => element.name === name);
-              let id =  arr[index].id;
-              this.removeAccount(id);
-            }
-         });
+        this.removeAccount(this.lastOptions.account_id);
       }
 
       if(event.target.classList.contains('transaction__remove')) {
@@ -97,9 +82,6 @@ class TransactionsPage {
         Transaction.remove({ id: id }, (err, response) => {
         if (response) {
           App.update();
-          // let accountWidget;
-          // accountWidget = new AccountsWidget(document.querySelector(".accounts-panel"));
-          // accountWidget.update();
         } else {
             alert(err);
         }
@@ -126,15 +108,15 @@ class TransactionsPage {
           index = arr.findIndex(element => element.id === id);
           let name =  arr[index].name;
           this.renderTitle(name); 
-          Transaction.list(id, (err, response) => {
-              if (response) {
-                this.renderTransactions(response.data);
-              } else {
-                  alert(err);
-              }
-            });
-      } 
-    });
+       } 
+      });
+      Transaction.list(id, (err, response) => {
+        if (response) {
+          this.renderTransactions(response.data);
+        } else {
+            alert(err);
+        }
+      });
     }
   }
 
@@ -186,52 +168,37 @@ class TransactionsPage {
     // sum: 100
     // type: "income"
     // user_id: "1al3jh130kmgt4lcl"
+
+    let date = this.formatDate(item.created_at); 
+
     let divTransaction = document.createElement('div');
     if(item.type === 'income') {
       divTransaction.classList.add('transaction', 'transaction_income', 'row');
     } else {
       divTransaction.classList.add('transaction', 'transaction_expens', 'row');
     }
-    let divDetails = document.createElement('div');
-    divDetails.classList.add('col-md-7', 'transaction__details');
-    divTransaction.appendChild(divDetails);
-    let divIcon =  document.createElement('div');
-    divIcon.classList.add('transaction__icon');
-    divDetails.appendChild(divIcon);
-    
-    let span1 =  document.createElement('span');
-    span1.classList.add('fa', 'fa-money', 'fa-2x');
-    divIcon.appendChild(span1);
 
-    let divInfo =  document.createElement('div');
-    divInfo.classList.add('transaction__info');
-    divDetails.appendChild(divInfo);
-
-    divInfo.insertAdjacentHTML('beforeEnd',  '<h4 class="transaction__title">' + item.name + '</h4>');
-  
-    let date = this.formatDate(item.created_at); 
-  
-    divInfo.insertAdjacentHTML('beforeEnd',  '<div class="transaction__date">' + date + '</div>');
-
-    let colMd3 =  document.createElement('div');
-    colMd3.classList.add('col-md-3');
-    divTransaction.appendChild(colMd3);
-
-    let summ =  document.createElement('div');
-    summ.classList.add('transaction__summ');
-    summ.insertAdjacentHTML('beforeEnd',  item.sum + '<span class="currency">₽</span>');
-    colMd3.appendChild(summ);
-
-    let colMd2 =  document.createElement('div');
-    colMd2.classList.add('col-md-2', 'transaction__controls');
-    divTransaction.appendChild(colMd2);
-
-    let button =  document.createElement('button');
-    button.classList.add('btn', 'btn-danger', 'transaction__remove');
-    button.setAttribute("data-id", item.id);
-    colMd2.appendChild(button);
-
-    button.insertAdjacentHTML('beforeEnd', '<i class="fa fa-trash"></i>');
+    divTransaction.insertAdjacentHTML('beforeEnd', 
+    `<div class="col-md-7 transaction__details">
+      <div class="transaction__icon">
+          <span class="fa fa-money fa-2x"></span>
+      </div>
+      <div class="transaction__info">
+          <h4 class="transaction__title">${item.name}</h4>
+          <!-- дата -->
+          <div class="transaction__date">${date}</div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="transaction__summ">
+      ${item.sum} <span class="currency">₽</span>
+      </div>
+    </div>
+    <div class="col-md-2 transaction__controls">
+        <button class="btn btn-danger transaction__remove" data-id="${item.id}">
+            <i class="fa fa-trash"></i>  
+        </button>
+    </div>`);
     return divTransaction;
   }
 
